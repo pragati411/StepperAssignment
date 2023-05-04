@@ -24,7 +24,7 @@ const RegisterUser = () => {
       },
       {
         id: 2,
-        name: "professionn",
+        name: "profession",
         title: "what is your profession",
         options: ["Frontend", "Backened"],
         select: null,

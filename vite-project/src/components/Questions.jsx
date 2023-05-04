@@ -1,14 +1,23 @@
-import { useContext } from "react";
-import FormField from "./UserField";
+import { useContext, useState } from "react";
+
 import { userProfileContext } from "./Form";
+import FormField from "./UserField";
 
 export default function Questions() {
+  const [option, setOption] = useState([]);
+
   const { userDetails, setUserDetails } = useContext(userProfileContext);
+  console.log(setUserDetails);
+
+  console.log(option);
+  const selectedOption = (e) => {
+    setOption((lastState) => [...lastState, e.target.value]);
+    userDetails.questions.select = option;
+  };
 
   return (
     <div>
-      
-
+      <FormField />
       <div>
         {userDetails.questions.map((item) => {
           return (
@@ -18,7 +27,12 @@ export default function Questions() {
               {item.options.map((value) => {
                 return (
                   <div key={value}>
-                    <input type="radio" name={item.value} />
+                    <input
+                      type="radio"
+                      value={value}
+                      name={`question${item.name}`}
+                      onClick={selectedOption}
+                    />
                     <label>{value}</label>
                   </div>
                 );

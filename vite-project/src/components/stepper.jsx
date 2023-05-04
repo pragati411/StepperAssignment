@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Stepper } from "react-form-stepper";
 
 function UserDetails() {

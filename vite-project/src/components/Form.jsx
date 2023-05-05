@@ -1,11 +1,11 @@
-import { createContext, useState } from "react";
+import { useMemo, useState } from "react";
 import { Stepper } from "react-form-stepper";
 import FormField from "./UserField";
 import Questions from "./Questions";
 import Result from "./Result";
-export const userProfileContext = createContext(null);
-const UserProfileProvider = userProfileContext.Provider;
-
+import { UserProfileProvider } from "../context/userProfilecontext";
+import { Container } from "./style";
+const steps = [{ label: "" }, { label: "" }, { label: "" }];
 const RegisterUser = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [userDetails, setUserDetails] = useState({
@@ -32,8 +32,6 @@ const RegisterUser = () => {
     ],
   });
 
-  const steps = [{ label: "" }, { label: "" }, { label: "" }];
-
   function getSectionComponent() {
     switch (activeStep) {
       case 0:
@@ -47,21 +45,31 @@ const RegisterUser = () => {
     }
   }
 
+  const changeView = (page) => {
+    setActiveStep((prevState) => prevState + page);
+  };
+
+  const prevBtnDisable = useMemo(() => {
+    return activeStep === 0;
+  }, [activeStep]);
+
+  const nextBtnDisable = useMemo(() => {
+    return activeStep === 2;
+  }, [activeStep]);
+
   return (
     <UserProfileProvider value={{ userDetails, setUserDetails }}>
       <div>
         <Stepper steps={steps} activeStep={activeStep} />
-        <div style={{ padding: "20px" }}>
+        <Container>
           {getSectionComponent()}
-          {activeStep !== 0 && activeStep !== steps.length - 1 && (
-            <button onClick={() => setActiveStep(activeStep - 1)}>
-              Previous
-            </button>
-          )}
-          {activeStep !== steps.length - 1 && (
-            <button onClick={() => setActiveStep(activeStep + 1)}>Next</button>
-          )}
-        </div>
+          <button disabled={prevBtnDisable} onClick={() => changeView(-1)}>
+            Previous
+          </button>
+          <button disabled={nextBtnDisable} onClick={() => changeView(1)}>
+            Next
+          </button>
+        </Container>
       </div>
     </UserProfileProvider>
   );

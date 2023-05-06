@@ -10,23 +10,30 @@ const RegisterUser = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [userDetails, setUserDetails] = useState({
     basic: {
-      name: "pragati",
-      city: "bhopal",
-      mobile: "764335",
+      name: "",
+      city: "",
+      mobile: "",
     },
     questions: [
       {
         id: 1,
         name: "hobby",
-        title: "What is your hobby",
-        options: ["music", "cricket"],
+        title: " 1: What is your hobby",
+        options: ["Music", "Cricket"],
         select: null,
       },
       {
         id: 2,
         name: "profession",
-        title: "what is your profession",
+        title: " 2: what is your profession",
         options: ["Frontend", "Backened"],
+        select: null,
+      },
+      {
+        id: 3,
+        name: "Emplyement",
+        title: " 3: what is your current employement status",
+        options: ["Employed", "Unemployed"],
         select: null,
       },
     ],

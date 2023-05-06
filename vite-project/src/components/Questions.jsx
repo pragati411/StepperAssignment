@@ -12,7 +12,7 @@ export default function Questions() {
         ...prevState,
         questions: prevState.questions.map((item) => {
           const current = { ...item };
-
+console.log(item, item.name)
           if (item.name === name) {
             current.select = value;
           }

@@ -5,6 +5,19 @@ const FormField = () => {
   const { userDetails, setUserDetails } = useContext(userProfileContext);
   console.log(userDetails, setUserDetails);
 
+  const onInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserDetails((prevState) => {
+      return {
+        ...prevState,
+        basic: {
+          ...prevState.basic,
+          [name]: value,
+        },
+      };
+    });
+  };
+
   return (
     <>
       <div>
@@ -13,6 +26,7 @@ const FormField = () => {
           name="name"
           value={userDetails.basic.name}
           placeholder="Enter your name"
+          onChange={onInputChange}
         />
       </div>
       <div>
@@ -21,6 +35,7 @@ const FormField = () => {
           name="city"
           value={userDetails.basic.city}
           placeholder="enter your city"
+          onChange={onInputChange}
         />
       </div>
       <div>
@@ -30,6 +45,7 @@ const FormField = () => {
           type="number"
           value={userDetails.basic.mobile}
           placeholder="enter your mobile"
+          onChange={onInputChange}
         />
       </div>
     </>
